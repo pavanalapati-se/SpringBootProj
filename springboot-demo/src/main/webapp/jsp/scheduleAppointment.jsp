@@ -9,7 +9,7 @@
 <body>
 	<h3>Schedule Appointment Page</h3>
 	<hr />
-	<form action="/scheduleappointment" method="post">
+	<form action="/appointments/scheduleappointment" method="post">
 		<table border="1">
 			<tr>
 				<td>Appointment Id</td>
@@ -32,6 +32,6 @@
 			</tr>
 		</table>
 	</form>
-	
+	<span style="color:red">${errormsg}</span>
 </body>
 </html>

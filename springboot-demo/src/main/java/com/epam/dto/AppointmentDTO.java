@@ -1,6 +1,9 @@
 package com.epam.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class AppointmentDTO {
+	
 	
 	private int appointmentId;
 	
