@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.time.LocalDate"%>
-   
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<%=LocalDate.now()%>
-
-
-Hello Happy Hoil to all
+<h2>${successmsg}</h2>
 </body>
 </html>
