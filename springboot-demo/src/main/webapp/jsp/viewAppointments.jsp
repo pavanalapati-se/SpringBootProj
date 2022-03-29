@@ -23,9 +23,10 @@
 				<td>${appointment.vaccineDoseNumber}</td>
 				<td>${appointment.date}</td>
 				<td>${appointment.location}</td>
+				<td><a href="/appointments/loadeditscheduleappointment/${appointment.appointmentId}">Edit Scheduled Appointment</a> </td>
 			</tr>
 		</core:forEach>
-		<a href="/editschedulesppointment">Edit Scheduled Appointment</a> |
+		|
 		<a href="/deleteschedulesppointment">Delete Scheduled Appointment</a>
 	</table>
 </body>

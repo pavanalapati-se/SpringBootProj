@@ -13,13 +13,20 @@ public class AppointmentService {
 
 	@Autowired
 	private AppointmentDao appointmentDao;
-	
-	
-	public List<AppointmentDTO> getAppointments(){
+
+	public List<AppointmentDTO> getAppointments() {
 		return appointmentDao.listAppointments();
 	}
-	
+
 	public void createAppointment(AppointmentDTO appointmentDTO) {
 		appointmentDao.schduledAppointment(appointmentDTO);
+	}
+
+	public void editSchduledAppointment(AppointmentDTO appointmentDTO) {
+		appointmentDao.editSchduledAppointment(appointmentDTO);
+	}
+
+	public AppointmentDTO getAppointmentDetailsById(int appointmentId) {
+		return appointmentDao.getAppointmentById(appointmentId);
 	}
 }
