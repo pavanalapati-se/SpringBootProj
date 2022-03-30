@@ -19,11 +19,7 @@
 	<hr />
 	<form:form action="/appointments/scheduleappointment" method="post" modelAttribute="appointmentDTO" >
 		<table border="1">
-			<tr>
-				<td>Appointment Id</td>
-				<td><form:input path="appointmentId" /></td>
-				<td><form:errors path="appointmentId" cssClass="error"></form:errors></td>
-			</tr>
+			
 			<tr>
 				<td>Vaccine Dose Number</td>
 				<td><form:input path="vaccineDoseNumber" /></td>

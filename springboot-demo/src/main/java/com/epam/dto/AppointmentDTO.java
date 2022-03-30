@@ -12,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class AppointmentDTO {
 	
 	
-	@NotNull(message="Please enter Appointment Id. ")
 	private Integer appointmentId;
 	
 	@NotBlank(message = "Please enter vaccine dose number")

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.dto.AppointmentDTO;
@@ -37,10 +38,10 @@ public class AppointmentController {
 
 		return modelAndView;
 	}
-	
+
 	@GetMapping("/{id}")
 	public ModelAndView getAppointmentByAppointmentId(@PathVariable int id) {
-		AppointmentDTO appointmentDTO =  appointmentService.getAppointmentDetailsById(id);
+		AppointmentDTO appointmentDTO = appointmentService.getAppointmentDetailsById(id);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("appointmentDTO", appointmentDTO);
 		modelAndView.setViewName("viewAppointment");
@@ -50,6 +51,7 @@ public class AppointmentController {
 	@GetMapping("/loadscheduleappointment")
 	public ModelAndView loadScheduleAppointment() {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appointmentDTO", new AppointmentDTO());
 		modelAndView.setViewName("scheduleAppointment");
 		return modelAndView;
 	}
@@ -72,15 +74,14 @@ public class AppointmentController {
 	@GetMapping("/loadeditscheduleappointment/{appointmentid}")
 	public ModelAndView loadEditPageForScheduleAppointment(
 			@PathVariable(name = "appointmentid") Integer appointmentid) {
-		
+
 		ModelAndView modelAndView = new ModelAndView();
-		
+
 		Optional<AppointmentDTO> appointmentDTO = appointmentService.getAppointments().stream()
 				.filter(ad -> ad.getAppointmentId().equals(appointmentid)).findAny();
-		
-		
-		modelAndView.addObject("appointmentDTO",appointmentDTO.get());
-		
+
+		modelAndView.addObject("appointmentDTO", appointmentDTO.get());
+
 		modelAndView.setViewName("scheduleAppointment");
 		return modelAndView;
 	}
@@ -98,6 +99,24 @@ public class AppointmentController {
 			modelAndView.setViewName("scheduleAppointment");
 		}
 
+		return modelAndView;
+	}
+
+	@GetMapping("/loadseaerchpage")
+	public ModelAndView loadSearchPage() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("searchByLocation");
+		return modelAndView;
+	}
+
+	@PostMapping("/searchpage")
+	public ModelAndView searchByLocation(@RequestParam("location") String location) {
+
+		List<AppointmentDTO> appointments = appointmentService.searchBasedOnLocation(location);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appointments", appointments);
+
+		modelAndView.setViewName("searchByLocation");
 		return modelAndView;
 	}
 
