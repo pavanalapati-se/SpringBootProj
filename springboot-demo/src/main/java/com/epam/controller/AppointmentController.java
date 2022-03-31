@@ -31,93 +31,94 @@ public class AppointmentController {
 
 		List<AppointmentDTO> appointments = appointmentService.getAppointments();
 
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("pageTitle", "Appointments Page");
-		modelAndView.addObject("appointments", appointments);
-		modelAndView.setViewName("viewAppointments");
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("pageTitle", "Appointments Page");
+		mv.addObject("appointments", appointments);
+		mv.setViewName("viewAppointments");
 
-		return modelAndView;
+		return mv;
 	}
 
 	@GetMapping("/{id}")
 	public ModelAndView getAppointmentByAppointmentId(@PathVariable int id) {
 		AppointmentDTO appointmentDTO = appointmentService.getAppointmentDetailsById(id);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("appointmentDTO", appointmentDTO);
-		modelAndView.setViewName("viewAppointment");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("appointmentDTO", appointmentDTO);
+		mv.setViewName("viewAppointment");
+		return mv;
 	}
 
 	@GetMapping("/loadscheduleappointment")
 	public ModelAndView loadScheduleAppointment() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("appointmentDTO", new AppointmentDTO());
-		modelAndView.setViewName("scheduleAppointment");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("appointmentDTO", new AppointmentDTO());
+		mv.setViewName("scheduleAppointment");
+		return mv;
 	}
 
 	@PostMapping("/scheduleappointment")
 	public ModelAndView schduleAppointment(@Valid @ModelAttribute AppointmentDTO appointmentDTO, BindingResult result) {
 
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 		if (!result.hasErrors()) {
 			appointmentService.createAppointment(appointmentDTO);
-			modelAndView.addObject("successmsg", "Vaccine schdueled successfully.");
-			modelAndView.setViewName("success");
+			mv.addObject("successmsg", "Vaccine schdueled successfully.");
+			mv.setViewName("success");
 		} else {
-			modelAndView.setViewName("scheduleAppointment");
+			mv.setViewName("scheduleAppointment");
 		}
 
-		return modelAndView;
+		return mv;
 	}
 
 	@GetMapping("/loadeditscheduleappointment/{appointmentid}")
 	public ModelAndView loadEditPageForScheduleAppointment(
 			@PathVariable(name = "appointmentid") Integer appointmentid) {
 
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 
 		Optional<AppointmentDTO> appointmentDTO = appointmentService.getAppointments().stream()
 				.filter(ad -> ad.getAppointmentId().equals(appointmentid)).findAny();
 
-		modelAndView.addObject("appointmentDTO", appointmentDTO.get());
+		mv.addObject("appointmentDTO", appointmentDTO.get());
 
-		modelAndView.setViewName("scheduleAppointment");
-		return modelAndView;
+		mv.setViewName("scheduleAppointment");
+		return mv;
 	}
 
 	@PostMapping("/editscheduleappointment")
 	public ModelAndView editschduleAppointment(@Valid @ModelAttribute AppointmentDTO appointmentDTO,
 			BindingResult result) {
 
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 		if (!result.hasErrors()) {
 			appointmentService.createAppointment(appointmentDTO);
-			modelAndView.addObject("successmsg", "Vaccine schdueled successfully.");
-			modelAndView.setViewName("success");
+			mv.addObject("successmsg", "Vaccine schdueled successfully.");
+			mv.setViewName("success");
 		} else {
-			modelAndView.setViewName("scheduleAppointment");
+			mv.setViewName("scheduleAppointment");
 		}
 
-		return modelAndView;
+		return mv;
 	}
 
 	@GetMapping("/loadseaerchpage")
 	public ModelAndView loadSearchPage() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("searchByLocation");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("searchByLocation");
+		return mv;
 	}
 
 	@PostMapping("/searchpage")
 	public ModelAndView searchByLocation(@RequestParam("location") String location) {
 
 		List<AppointmentDTO> appointments = appointmentService.searchBasedOnLocation(location);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("appointments", appointments);
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("appointments", appointments);
 
-		modelAndView.setViewName("searchByLocation");
-		return modelAndView;
+		mv.setViewName("searchByLocation");
+		return mv;
 	}
 
 }
