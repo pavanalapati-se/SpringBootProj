@@ -16,13 +16,18 @@
 </head>
 <body>
 	<h3>Schedule Appointment Page</h3>
+	<hr/>
 	<hr />
-	<form:form action="/appointments/scheduleappointment" method="post" modelAttribute="appointmentDTO" >
+	<hr />
+	<hr/>
+	<hr />
+	<hr />
+	<form:form action="/appointments/scheduleappointment" method="post"  modelAttribute="appointmentDTO"  >
 		<table border="1">
 			
 			<tr>
 				<td>Vaccine Dose Number</td>
-				<td><form:input path="vaccineDoseNumber" /></td>
+				<td><form:input path="vaccineDoseNumber" /></td> 
 				<td><form:errors path="vaccineDoseNumber" cssClass="error"></form:errors></td>
 			</tr>
 			<tr>

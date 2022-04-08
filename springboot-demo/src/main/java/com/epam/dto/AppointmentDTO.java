@@ -1,5 +1,6 @@
 package com.epam.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Future;
@@ -9,18 +10,23 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class AppointmentDTO {
+public class AppointmentDTO implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6677356868925097390L;
+
 	private Integer appointmentId;
 	
-	@NotBlank(message = "Please enter vaccine dose number")
+	@NotBlank(message="{vaccineDoseNumber.not.blank}")
 	@Size(max = 12)
 	private String vaccineDoseNumber;
 	
-	@NotNull(message="Please enter vaccination date")
+	@NotNull(message="{date.not.null}")
 	//@Pattern(regexp = "([0-9]{2})/([0-9]{2})/([0-9]{4})",message = "Please enter date in dd/MM/YYYY format")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy" )
 	@Future
 	private LocalDate date;
 	
@@ -35,15 +41,6 @@ public class AppointmentDTO {
 		this.appointmentId = appointmentId;
 	}
 
-	public String getVaccineDoseNumber() {
-		return vaccineDoseNumber;
-	}
-
-	public void setVaccineDoseNumber(String vaccineDoseNumber) {
-		this.vaccineDoseNumber = vaccineDoseNumber;
-	}
-
-	
 
 	public LocalDate getDate() {
 		return date;
@@ -59,6 +56,16 @@ public class AppointmentDTO {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	
+	
+	public String getVaccineDoseNumber() {
+		return vaccineDoseNumber;
+	}
+
+	public void setVaccineDoseNumber(String vaccineDoseNumber) {
+		this.vaccineDoseNumber = vaccineDoseNumber;
 	}
 
 	@Override

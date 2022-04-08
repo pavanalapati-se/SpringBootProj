@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.epam.dto.AppointmentDTO;
 import com.epam.service.AppointmentService;
 
 @Controller
-@RequestMapping("/appointments")
+@RequestMapping("/vaccineappointments")
 public class AppointmentController {
 
 	@Autowired
@@ -34,7 +35,8 @@ public class AppointmentController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pageTitle", "Appointments Page");
 		mv.addObject("appointments", appointments);
-		mv.setViewName("viewAppointments");
+		
+		mv.setView(new RedirectView("/jsp/viewAppointments.jsp"));
 
 		return mv;
 	}
