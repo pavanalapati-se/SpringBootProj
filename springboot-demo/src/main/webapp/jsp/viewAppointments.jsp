@@ -23,7 +23,7 @@
 				<td>${appointment.vaccineDoseNumber}</td>
 				<td>${appointment.date}</td>
 				<td>${appointment.location}</td>
-				<td><a href="/appointments/loadeditscheduleappointment/${appointment.appointmentId}">Edit Scheduled Appointment</a> </td>
+				<td><a href="/vaccineappointments/loadeditscheduleappointment/${appointment.appointmentId}">Edit Scheduled Appointment</a> </td>
 			</tr>
 		</core:forEach>
 		|

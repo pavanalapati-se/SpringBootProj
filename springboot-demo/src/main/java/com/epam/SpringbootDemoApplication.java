@@ -1,5 +1,6 @@
 package com.epam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +8,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+import com.epam.dao.UserRepository;
+import com.epam.entity.User;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -17,6 +23,9 @@ import io.swagger.v3.oas.annotations.info.Info;
 @OpenAPIDefinition(info = @Info(title = "Vaccine Management Tool", version = "1.0", description = "Scheudle vaccine appointments"))
 public class SpringbootDemoApplication implements CommandLineRunner {
 
+	@Autowired
+	private UserRepository userRepository;
+	
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(SpringbootDemoApplication.class, args);
 
@@ -28,7 +37,25 @@ public class SpringbootDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("restarted again");
 		System.out.println("Run method executing .......................");
-
+		
+		PasswordEncoder encoder = new BCryptPasswordEncoder(11);
+		
+		User user1 = new User();
+		user1.setId(102);
+		user1.setUsername("pavan");
+		user1.setPassword(encoder.encode("password"));
+		
+		User user2 = new User();
+		user2.setId(103);
+		user2.setUsername("kumar");
+		user2.setPassword(encoder.encode("password"));
+		
+		
+		userRepository.save(user1);
+		userRepository.save(user2);
+		
+		
+	
 	}
 
 	@Bean

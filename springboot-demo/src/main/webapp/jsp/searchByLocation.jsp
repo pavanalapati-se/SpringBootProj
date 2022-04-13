@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/appointments/searchpage" method="post">
+	<form action="/vaccineappointments/searchpage" method="post">
 		Location : <input type="text" name="location"> <br /> <br />
 		<input type="submit" value="Search Location">
 

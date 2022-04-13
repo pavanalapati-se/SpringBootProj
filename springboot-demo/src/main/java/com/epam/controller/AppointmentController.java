@@ -28,6 +28,7 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 
 	@GetMapping
+  
 	public ModelAndView getAppointments() {
 
 		List<AppointmentDTO> appointments = appointmentService.getAppointments();
@@ -51,6 +52,7 @@ public class AppointmentController {
 	}
 
 	@GetMapping("/loadscheduleappointment")
+   
 	public ModelAndView loadScheduleAppointment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("appointmentDTO", new AppointmentDTO());

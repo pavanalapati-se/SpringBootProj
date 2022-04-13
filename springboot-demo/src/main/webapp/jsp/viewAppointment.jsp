@@ -23,7 +23,7 @@
 			<td>${appointmentDTO.date}</td>
 			<td>${appointmentDTO.location}</td>
 			<td><a
-				href="/appointments/loadeditscheduleappointment/${appointment.appointmentId}">Edit
+				href="/vaccineappointments/loadeditscheduleappointment/${appointment.appointmentId}">Edit
 					Scheduled Appointment</a> | <a href="/deleteschedulesppointment">Delete
 					Scheduled Appointment</a></td>
 		</tr>

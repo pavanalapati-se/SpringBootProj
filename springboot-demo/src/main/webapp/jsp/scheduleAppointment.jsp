@@ -22,7 +22,7 @@
 	<hr/>
 	<hr />
 	<hr />
-	<form:form action="/appointments/scheduleappointment" method="post"  modelAttribute="appointmentDTO"  >
+	<form:form action="/vaccineappointments/scheduleappointment" method="post"  modelAttribute="appointmentDTO"  >
 		<table border="1">
 			
 			<tr>

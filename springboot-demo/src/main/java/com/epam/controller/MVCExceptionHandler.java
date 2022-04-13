@@ -18,10 +18,6 @@ public class MVCExceptionHandler {
 		
 		simpleMappingExceptionResolver.addStatusCode("error", 401);
 		
-		
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("message", exception.getMessage());
-//		mv.setViewName("error");
 		return simpleMappingExceptionResolver;
 	}
 }
