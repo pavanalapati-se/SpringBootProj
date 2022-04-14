@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 
 	@GetMapping
-  
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public ModelAndView getAppointments() {
 
 		List<AppointmentDTO> appointments = appointmentService.getAppointments();
@@ -36,7 +37,7 @@ public class AppointmentController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pageTitle", "Appointments Page");
 		mv.addObject("appointments", appointments);
-		
+
 		mv.setView(new RedirectView("/jsp/viewAppointments.jsp"));
 
 		return mv;
@@ -52,7 +53,7 @@ public class AppointmentController {
 	}
 
 	@GetMapping("/loadscheduleappointment")
-   
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView loadScheduleAppointment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("appointmentDTO", new AppointmentDTO());
@@ -61,6 +62,7 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/scheduleappointment")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ModelAndView schduleAppointment(@Valid @ModelAttribute AppointmentDTO appointmentDTO, BindingResult result) {
 
 		ModelAndView mv = new ModelAndView();
@@ -118,7 +120,7 @@ public class AppointmentController {
 
 		List<AppointmentDTO> appointments = appointmentService.searchBasedOnLocation(location);
 		ModelAndView mv = new ModelAndView();
-		
+
 		mv.addObject("appointments", appointments);
 
 		mv.setViewName("searchByLocation");

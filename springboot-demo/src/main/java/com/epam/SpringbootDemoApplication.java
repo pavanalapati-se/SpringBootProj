@@ -12,7 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import com.epam.dao.AuthGroupRepository;
 import com.epam.dao.UserRepository;
+import com.epam.entity.AuthGroup;
 import com.epam.entity.User;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -25,6 +27,9 @@ public class SpringbootDemoApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private AuthGroupRepository authGroupRepository;
 	
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(SpringbootDemoApplication.class, args);
@@ -53,6 +58,18 @@ public class SpringbootDemoApplication implements CommandLineRunner {
 		
 		userRepository.save(user1);
 		userRepository.save(user2);
+		
+		 
+        AuthGroup authGroup = new AuthGroup();
+        authGroup.setUsername("pavan");
+        authGroup.setAuthGroup("ADMIN");
+        
+        AuthGroup authGroup1 = new AuthGroup();
+        authGroup1.setUsername("kumar");
+        authGroup1.setAuthGroup("USER");
+        
+        authGroupRepository.save(authGroup);
+        authGroupRepository.save(authGroup1);
 		
 		
 	

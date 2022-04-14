@@ -1,35 +1,39 @@
 package com.epam.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.epam.dao.AuthGroupRepository;
 import com.epam.dao.UserRepository;
 import com.epam.dto.UserPrincipal;
+import com.epam.entity.AuthGroup;
 import com.epam.entity.User;
 
 @Service
-public class AppUserDetailsService implements UserDetailsService{
+public class AppUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	private UserRepository userRepository;
-	
-	
-	public AppUserDetailsService(UserRepository userRepository) {
+	private final UserRepository repository;
+
+	private final AuthGroupRepository authGroupRepository;
+
+	public AppUserDetailsService(UserRepository repository, AuthGroupRepository authGroupRepository) {
 		super();
-		this.userRepository = userRepository;
+		this.repository = repository;
+		this.authGroupRepository = authGroupRepository;
 	}
-
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
-		if(null==user) {
-			throw new UsernameNotFoundException(username);
+		User user = repository.findByUsername(username);
+		if (null == user) {
+			throw new UsernameNotFoundException("Cannot find username :" + username);
 		}
-		return new UserPrincipal(user);
+		List<AuthGroup> authGroups = authGroupRepository.findByUsername(username);
+		return new UserPrincipal(user, authGroups);
 	}
 
 }
